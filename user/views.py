@@ -9,10 +9,12 @@ def signup(request):
         if form.is_valid():
             form.save()
             return redirect('task_list')
-        else:
+    else:
             form = SignupForm()
     return render(request, 'user/signup.html', {'form': form})
 class Login(LoginView):
     template_name = 'user/login.html'
+    next_page = 'task_list'
 class Logout(LogoutView):
     template_name = 'user/logout.html'
+    next_page = 'login'
