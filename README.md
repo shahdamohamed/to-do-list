@@ -12,7 +12,7 @@ This repository contains the source code for a simple and functional To-Do List 
 ## Technology Stack 🛡️
 
 - **Backend**: Django (Python)
-- **Frontend**: HTML, CSS, Bootstrap (for styling)
+- **Frontend**: HTML, CSS.
 - **Database**: SQLite (default Django database)
 
 ## Installation 🚀
