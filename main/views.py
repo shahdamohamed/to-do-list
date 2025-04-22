@@ -4,22 +4,31 @@ from .forms import add_task
 
 # Create your views here.
 def task_list(request):
-    tasks = Task.objects.all()
+    if request.user.is_authenticated:
+        tasks = Task.objects.filter(user=request.user)
+    else:
+        tasks = Task.objects.none()  # Return empty queryset if user is not logged in
     return render(request, 'main/task_list.html', {'tasks': tasks})
+
 def task_detail(request, pk):
     task = get_object_or_404(Task, pk=pk)
     return render(request, 'main/details.html', {'task': task})
-def create_task(request):  # Renamed from add_task to create_task
+
+def create_task(request):
+    if not request.user.is_authenticated:
+        return redirect('login')  # Redirect to login page if user is not authenticated
+    
     if request.method == 'POST':
         form = add_task(request.POST)
         if form.is_valid():
             task = form.save(commit=False)
-            task.user = request.user  # Assuming Task model has a user field
+            task.user = request.user
             task.save()
             return redirect('task_list')
     else:
         form = add_task()
     return render(request, 'main/add_task.html', {'form': form})
+
 def edit_task(request, pk):
     task = get_object_or_404(Task, pk=pk)
     if request.method == 'POST':
@@ -30,6 +39,7 @@ def edit_task(request, pk):
     else:
         form = add_task(instance=task)
     return render(request, 'main/edit_task.html', {'form': form})
+
 def delete_task(request, pk):
     task = get_object_or_404(Task, pk=pk)
     if request.method == 'POST':
