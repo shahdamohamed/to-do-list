@@ -30,23 +30,18 @@ Follow these steps to set up the project locally:
    python -m venv venv
    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
    ```
-
-3. Install the dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. Apply the database migrations:
+   
+3. Apply the database migrations:
    ```bash
    python manage.py migrate
    ```
 
-5. Run the development server:
+4. Run the development server:
    ```bash
    python manage.py runserver
    ```
 
-6. Open your web browser and visit `http://127.0.0.1:8000/`.
+5. Open your web browser and visit `http://127.0.0.1:8000/`.
 
 ## Usage 🖱️
 
